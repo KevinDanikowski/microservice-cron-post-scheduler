@@ -1,0 +1,15 @@
+/* can have wrong path or states mysql not a command, set path */
+//https://stackoverflow.com/questions/22391778/mysql-command-line-bash-command-not-found
+cmd: export PATH=$PATH:/usr/local/mysql/bin/
+cmd: mysql -u root -p
+prompt: just imput the password
+
+/* forgot/lost password, reset root password */
+//https://stackoverflow.com/questions/6474775/setting-the-mysql-root-user-password-on-os-x
+first; stop the server
+cmd: sudo mysqld_safe --skip-grant-tables;
+then: connect to database to use these comands...
+cmd: mysql -u root
+cmd: UPDATE mysql.user SET authentication_string=PASSWORD("your-password") WHERE User='root';
+cmd: FLUSH PRIVILEGES
+cmd: \q

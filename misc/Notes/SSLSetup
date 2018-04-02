@@ -1,0 +1,5 @@
+// https://code.lengstorf.com/deploy-nodejs-ssl-digitalocean/
+Note for the above, you will need two records, one for port 80, and one for port 443, so you will have 2 server {...} for one site. also note that all fullchain.pem and privkey.pem will come from one .../live/example.com location despite having multiple subdomains.
+This person gave an example file which works and was helpful for debugging: https://www.digitalocean.com/community/questions/letsencrypt-cannot-connect-to-domain-err_connection_refused
+// need to use --webroot method not --standalone https://community.letsencrypt.org/t/trying-to-renew-cert-on-nginx-but-getting-problem-binding-to-port-443-could-not-bind-to-ipv4-or-ipv6/36289
+//ideally use this install, instead of git clone to install, see here: https://www.digitalocean.com/community/tutorials/how-to-use-certbot-standalone-mode-to-retrieve-let-s-encrypt-ssl-certificates

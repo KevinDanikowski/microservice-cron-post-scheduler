@@ -1,0 +1,12 @@
+# ReactJS
+add .env file
+add envFileConfigs.js with require('../config/env') if you ejected from CRA. each item should have process.env.NAME_IN_.ENV_FILE
+in env.js file, if you want client side access to .env variable (index.js/app.js) in the getClientEnvironment() add const ENV_FILE = require('../config/envFileConfigs'), then in the keys (where NODE_ENV: ... is) add more keys, such as API_URL: ENV_FILE.apiUrl || 'apiurl'. Note the configs file must be called inside the getClientEnvironment(), not before it. This will get stringified and added to new webpack global varables or something. Explained in depth in https://github.com/react-boilerplate/react-boilerplate/issues/1250 .
+Next in index.js add const variable = process.env.ENV_VARIABLE specified in the getCleintEnvironment()
+lastly to get in index.js install npm i -D env-cmd and in the commandline before all else specify "env-cmd .env <REST_OF_COMMAND>"
+
+# Express
+add envFileConfigs.js and inside add require('dotenv').config() (add the path if necessary) and then you can const ENV_FILE = {varaibles in .env : process.env.VARIABLE } . get more info at dotenv npm package and dont forget to npm i it
+
+When runniing on server:
+need to use 'pm2 start npm --name rewriter-app -- start' to get .env to work

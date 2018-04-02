@@ -1,0 +1,16 @@
+When Creating a New Schema, Or Adjusting Existing Schema Arguments, changes need to be reflected in all these areas:
+
+1. database schema (mongoose, sequelize, etc.)
+2. Graphql type
+3. Graphql queries
+    a. all
+    b. individual
+    c. responses from other queries taking into account this type
+    d. client side queries
+    e. test code for queries
+4. Graphql Mutations
+    a. create (response and args)
+    b. responses from other mutations
+    c. client side mutation responses and args
+    d. test code for mutations
+5.

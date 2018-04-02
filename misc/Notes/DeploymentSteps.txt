@@ -1,0 +1,16 @@
+First Setup First Do:
+1. Copy database, or run the sample db in the db.js
+2. set up .env file in root dir, should look like below:
+APP_PORT=3333
+API_PORT=3335
+API_URL=http://localhost:3335/graphql
+DB_HOST=...
+DB_USER=...
+DB_PASSWORD=...
+DB_DATABASE=...
+3. Set up serving to pull from build
+
+Setup
+1. Run from app, 'npm run-script build'
+2. Run 'pm2 start build --name app'
+2. run 'pm2 start server.js --name api' from server

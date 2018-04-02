@@ -1,0 +1,34 @@
+Learning from GraphQL-example
+1. dataloader npm package is to batch request server queries, works nice with graphql, will probably use
+2. context is used in the express-graphql package, it is to authenticate users before query (or really just reference
+their userId)
+3.
+
+
+For git:
+set orgin: https://stackoverflow.com/questions/42830557/git-remote-add-origin-vs-remote-set-url-origin
+    `git status` to see if ready to add
+    `git add .` to add all
+    `git status` to see if added
+    `git commit -m 'initial commit!'`
+    `git pull origin master`
+    `git push --set-upstream origin master`
+
+NEW INSTRUCTIONS:
+git init
+git add . //(delete node_modules)
+git commit -m "first commit"
+git remote set-url origin https://github.com/kevindanikowski/my_repo.git
+git push -u origin master
+input your username and password
+
+Updating:
+git add .
+git commit -m "message"
+git push -u origin master ***only need to use -u once to set upstream so it knows where to pull from***
+
+removing idea folder:
+git rm -r one-of-the-directories
+
+creating new branch: (remote-changes)
+git checkout -b branch name
