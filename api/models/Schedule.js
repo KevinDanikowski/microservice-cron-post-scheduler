@@ -1,5 +1,6 @@
 const Schedule = `
 type Schedule {
+    id: String
     month: Int
     date: Int
     hour: Int

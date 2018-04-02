@@ -3,6 +3,7 @@ import Schedule from './Schedule'
 
 const ScheduledPost = `
 type ScheduledPost {
+    id: String
     socialPost: SocialPost
     schedule: Schedule
     dateToBePosted: String
@@ -13,8 +14,8 @@ extend type Query {
 }
 extend type Mutation {
     SchedulePost (
-        socialPost: SocialPost, 
-        schedule: Schedule ): ScheduledPost!
+        socialPost: String, 
+        schedule: String ): ScheduledPost!
 }`
 
 export default () => [ScheduledPost, Schedule, SocialPost]

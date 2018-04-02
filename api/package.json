@@ -14,14 +14,12 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "express-graphql": "^0.6.11",
-    "google-translate-api": "^2.3.0",
     "graphql": "^0.13.0",
     "graphql-tools": "^2.21.0",
     "lodash": "^4.17.5",
     "mysql": "^2.15.0",
     "mysql2": "^1.5.2",
-    "sequelize": "^4.33.4",
-    "thesaurus": "0.0.0"
+    "sequelize": "^4.33.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

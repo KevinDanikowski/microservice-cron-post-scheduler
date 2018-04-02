@@ -33,7 +33,8 @@ const Image = Conn.define('image',{
     url: { type: Sequelize.STRING }
 })
 const ScheduledPost = Conn.define('scheduledPost',{
-    posted: { type: Sequelize.BOOL, defaultValue: false }
+    posted: { type: Sequelize.BOOLEAN, defaultValue: false },
+    dateToBePosted: { type: Sequelize.STRING }
 })
 
 /*   Relations   */
@@ -46,7 +47,7 @@ Image.belongsTo(SocialPost)
 
 /* add sample data */
 // only add data once, this destoys the data tables and makes new ones with the data
-
+/*
 const sampleScheduledPostsData = [
     {
         schedule: {
@@ -117,7 +118,7 @@ Conn.sync({force: true}).then(()=>{ //forces tables to be overwritten
         })
     })
 })
-
+*/
 
 
 export default Conn
