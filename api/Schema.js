@@ -1,12 +1,12 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import Base from './models/Base'
-import Rating from './models/Rating';
-import Rewrite from './models/Rewrite';
-import LanguageCombination from './models/LanguageCombination'
+import ScheduledPost from './models/ScheduledPost'
+import SocialPost from './models/SocialPost'
+import Schedule from './models/Schedule'
 import resolvers from './Resolvers';
 
 export default makeExecutableSchema({
-    typeDefs: [Base, Rating, Rewrite, LanguageCombination],
+    typeDefs: [Base, ScheduledPost, SocialPost, Schedule],
     resolvers,
     //logger: { log: e => console.log(e) },
 });

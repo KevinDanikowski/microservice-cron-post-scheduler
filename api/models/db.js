@@ -20,36 +20,29 @@ const Conn = new Sequelize(ENV_FILE.dbDatabase, ENV_FILE.dbUser, ENV_FILE.dbPass
         idle: 10000
     },
 })
-const Rating = Conn.define('rating',{
-    rating: {
-        type: Sequelize.INTEGER
-    },
-    wordCount: {
-        type: Sequelize.INTEGER
-    }
+const Schedule = Conn.define('schedule',{
+    month: { type: Sequelize.INTEGER },
+    date: { type: Sequelize.INTEGER },
+    hour: { type: Sequelize.INTEGER },
+    minute: { type: Sequelize.INTEGER },
 })
-const LanguageCombination = Conn.define('languageCombination',{
-    processingLanguages: {
-        type: Sequelize.STRING, //DOESN'T WORK
-        get: function(){
-            return JSON.parse(this.getDataValue('processingLanguages'))
-        },
-        set: function(val){
-          const stringifiedArray = JSON.stringify(val) //removes spaces and uses only " not '
-          this.setDataValue('processingLanguages', stringifiedArray)
-        },
-    },
-    language: {
-        type: Sequelize.STRING
-    },
-    translator: {
-        type: Sequelize.STRING
-    },
+const SocialPost = Conn.define('socialPost',{
+    message: { type: Sequelize.STRING },
+})
+const Image = Conn.define('image',{
+    url: { type: Sequelize.STRING }
+})
+const ScheduledPost = Conn.define('scheduledPost',{
+    posted: { type: Sequelize.BOOL }
 })
 
 /*   Relations   */
-LanguageCombination.hasMany(Rating)
-Rating.belongsTo(LanguageCombination)
+ScheduledPost.hasOne(Schedule)
+Schedule.belongsTo(ScheduledPost)
+ScheduledPost.hasOne(SocialPost)
+SocialPost.belongsTo(ScheduledPost)
+SocialPost.hasOne(Image)
+Image.belongsTo(SocialPost)
 
 /* add sample data */
 // only add data once, this destoys the data tables and makes new ones with the data
