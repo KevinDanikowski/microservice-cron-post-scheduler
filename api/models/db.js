@@ -33,7 +33,7 @@ const Image = Conn.define('image',{
     url: { type: Sequelize.STRING }
 })
 const ScheduledPost = Conn.define('scheduledPost',{
-    posted: { type: Sequelize.BOOL }
+    posted: { type: Sequelize.BOOL, defaultValue: false }
 })
 
 /*   Relations   */
@@ -46,43 +46,78 @@ Image.belongsTo(SocialPost)
 
 /* add sample data */
 // only add data once, this destoys the data tables and makes new ones with the data
-/*
-const sampleLanguageCombinationData = [
+
+const sampleScheduledPostsData = [
     {
-        processingLanguages: ['es','pl','nl'],
-        language: 'en',
-        translator: 'google',
-        ratings: [{rating: 3, wordCount: 36}, {rating: 2, wordCount: 253}]
-    },{
-        processingLanguages: ['es','pl'],
-        language: 'en',
-        translator: 'google',
-        ratings: [{rating: 5, wordCount: 15}, {rating: 4, wordCount: 117}]
-    },{
-        processingLanguages: ['es'],
-        language: 'en',
-        translator: 'google',
-        ratings:[{rating: 1, wordCount: 15}]
+        schedule: {
+            month: 1,
+            date: 1,
+            hour: 1,
+            minute: 1
+        },
+        socialPost: {
+            GCID: '12345',
+            message: 'message 1',
+            image: {
+                url: 'url.com'
+            }
+        }
+    },
+    {
+        schedule: {
+            month: 2,
+            date: 2,
+            hour: 2,
+            minute: 2
+        },
+        socialPost: {
+            GCID: '12345',
+            message: 'message 2',
+            image: {
+                url: 'url2.com'
+            }
+        }
+    },
+    {
+        schedule: {
+            month: 3,
+            date: 3,
+            hour: 3,
+            minute: 3
+        },
+        socialPost: {
+            GCID: '12345',
+            message: 'message 3',
+            image: {
+                url: 'url3.com'
+            }
+        }
     }
 ]
 Conn.sync({force: true}).then(()=>{ //forces tables to be overwritten
-  sampleLanguageCombinationData.map(languageCombination => {
-        console.log('going to create languageCombination ', languageCombination)
-        return LanguageCombination.create({
-          processingLanguages: languageCombination.processingLanguages,
-          language: languageCombination.language,
-          translator: languageCombination.translator
-        }).then(languageCombinationReturn => {
-            return languageCombination.ratings.map(rating=>{
-                languageCombinationReturn.createRating({
-                    rating: rating.rating,
-                    wordCount: rating.wordCount
+    sampleScheduledPostsData.map(scheduledPost => {
+        return ScheduledPost.create().then(scheduledPostReturn => {
+            const schedule = scheduledPost.schedule
+            const socialPost = scheduledPost.socialPost
+            return scheduledPostReturn.createSchedule({
+                month: schedule.month,
+                date: schedule.date,
+                hour: schedule.hour,
+                minute: schedule.minute
+            }).then(scheduleReturn => {
+                return scheduledPostReturn.createSocialPost({
+                    GCID: socialPost.GCID,
+                    message: socialPost.message,
+                }).then(socialPostReturn => {
+                    return socialPostReturn.createImage({
+                        url: socialPost.image.url
+                    })
                 })
             })
         })
     })
 })
-*/
+
 
 
 export default Conn
