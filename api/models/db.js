@@ -34,6 +34,8 @@ const Image = Conn.define('image',{
 })
 const ScheduledPost = Conn.define('scheduledPost',{
     posted: { type: Sequelize.BOOLEAN, defaultValue: false },
+    canceled: { type: Sequelize.BOOLEAN, defaultValue: false },
+    socialProfileId: { type: Sequelize.STRING },
     dateToBePosted: { type: Sequelize.STRING }
 })
 
@@ -62,7 +64,8 @@ const sampleScheduledPostsData = [
             image: {
                 url: 'url.com'
             }
-        }
+        },
+        socialProfileId: '1234'
     },
     {
         schedule: {
@@ -77,7 +80,8 @@ const sampleScheduledPostsData = [
             image: {
                 url: 'url2.com'
             }
-        }
+        },
+        socialProfileId: '1234'
     },
     {
         schedule: {
@@ -92,7 +96,8 @@ const sampleScheduledPostsData = [
             image: {
                 url: 'url3.com'
             }
-        }
+        },
+        socialProfileId: '1234'
     }
 ]
 Conn.sync({force: true}).then(()=>{ //forces tables to be overwritten

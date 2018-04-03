@@ -8,6 +8,14 @@ type SocialPost {
     GCID: String
     message: String
     image: Image
+}
+input ImageInput {
+    url: String
+}
+input SocialPostInput {
+    GCID: String
+    message: String
+    image: ImageInput
 }`
 
 export default () => [SocialPost]

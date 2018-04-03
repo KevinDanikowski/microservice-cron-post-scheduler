@@ -6,6 +6,7 @@ const ENV_FILE = {
     dbUser: process.env.DB_USER,
     dbPassword: process.env.DB_PASSWORD,
     dbDatabase: process.env.DB_DATABASE,
+    graphCoolProjectId: process.env.GRAPHCOOL_PROJECT_ID,
     graphiqlOn: process.env.GRAPHIQL_ON  || true
 }
 
