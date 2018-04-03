@@ -9,7 +9,7 @@ const GraphQLEndPoint ='https://api.graph.cool/simple/v1/cj8adz6qz09jy0105s1gkdp
 axios.post(GraphQLEndPoint, {
     query: query,
     variables: {
-        socialProfileId: 'cjarh57w039af0145mzoj1wm'
+        socialProfileId: 'cjarh57w039af0145mzoj1wm9'
     }
 }).then(function({data}) {
     if(data.errors) console.log(data.errors)
@@ -18,3 +18,4 @@ axios.post(GraphQLEndPoint, {
         console.log(socialProfile)
     }
 })
+console.log(test())

@@ -1,7 +1,7 @@
 import { find, filter } from 'lodash'
 import db from './models/db'
 import cron from 'cron'
-//import { postToSocialProfile } from './postToSocialProfile.cron
+import { postToSocialProfile } from './postToSocialProfile.cron'
 
 const timeZone = 'America/Chicago'
 
@@ -50,18 +50,21 @@ export default {
         SchedulePost: async (_, data) => {
             const sched = data.schedule
             const post = data.socialPost
+            const testId = 'cjarh57w039af0145mzoj1wm9'
+            const fakeScheduledPostId = '12342321'
             const cronTime = (true)? '* * * * * *' : //todo take true off when done
                 sched.minute.toString()+' '+
                 sched.hour.toString()+' '+
                 sched.date.toString()+' '+
                 sched.month.toString()+' '+
                 '* *' // day of week, year todo need to add year value so wont repeat
-            const schedulePost = new cron.CronJob({
-                cronTime: cronTime,
-                onTick: ()=>console.log('tick!'),
-                start: true,
-                timeZone: timeZone
-            })
+            // const schedulePost = new cron.CronJob({
+            //     cronTime: cronTime,
+            //     onTick: ()=>console.log('tick!'),
+            //     start: true,
+            //     timeZone: timeZone
+            // })
+            postToSocialProfile(fakeScheduledPostId, testId, post)
             return new Promise((resolve, reject) => {
                 resolve(Object.assign({},
                     {
