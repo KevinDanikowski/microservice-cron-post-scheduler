@@ -48,9 +48,11 @@ export default {
     },
     Mutation: {
         SchedulePost: async (_, data) => {
+            //todo send post ID and social profile ID in what is sent from main app
+            //todo fix settings page on main app
             const sched = data.schedule
             const post = data.socialPost
-            const testId = 'cjarh57w039af0145mzoj1wm9'
+            const fakeSocialProfileId = 'cjarh57w039af0145mzoj1wm9'
             const fakeScheduledPostId = '12342321'
             const cronTime = (true)? '* * * * * *' : //todo take true off when done
                 sched.minute.toString()+' '+
@@ -64,7 +66,7 @@ export default {
             //     start: true,
             //     timeZone: timeZone
             // })
-            postToSocialProfile(fakeScheduledPostId, testId, post)
+            postToSocialProfile(fakeScheduledPostId, fakeSocialProfileId, post)
             return new Promise((resolve, reject) => {
                 resolve(Object.assign({},
                     {

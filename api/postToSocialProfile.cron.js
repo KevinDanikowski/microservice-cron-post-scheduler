@@ -38,11 +38,11 @@ const getImage = (postingPlatform, socialPost) => {
         platform !== 'FACEBOOK_API' ||
         platform !== 'TWITTER_API' ||
         platform !== 'LINKEDIN_API') {
-            return {imageStream: null}
+            return {imageStream: null} //returns null so doesn't upload via stream
     } else {
         return new Promise((resolve, reject) => {
-            //todo get image
-            resolve({imageStream: ''})
+            //need to be able to use stream for this to work
+            resolve({imageStream: null})
         })
     }
 }
@@ -50,12 +50,26 @@ const sendPost = (postingPlatform, imageStream, socialPost) => {
     const platform = postingPlatform.platform
     if (imageStream !== null){
         return new Promise((resolve, reject)=>{
-            //upload with stream
+            //upload with stream once able
             resolve()
         })
     }
     return new Promise((resolve, reject)=>{
         if(platform === 'IFTTT'){
+            //todo left off here
+            const iftttUrl = 'url/taskhook'
+            const message = socialPost.message
+            const photoUrl = socialPost.image.url || null
+            const postLink = socialPost.link || null
+            axios.post(iftttUrl, {
+                value1: message,//message
+                value2: photoUrl,//imageUrl
+                value3: postLink//link if link post todo add link to message
+                //todo note that zapier can add the image by using buffer I believe
+            }).then(response=>{
+                console.log('just posted to ifttt')
+                resolve()
+            })
             //post via axios, add image url, message, and data to say what to do with it
         }
 
@@ -70,6 +84,7 @@ const updateDB = (scheduledPostId, socialPost) => {
             { where: { id: scheduledPostId } }
         ).then(id=>{
             return new Promise((resolve, reject)=> {
+                // tell graphcool database
                 const date = Date.now()
                 const mutation = `mutation UpdateSocialPost($socialPostId: ID, $lastPosted: String, $lastMessage: String){
                     updateSocialPost(id: $socialPostId, lastPosted: $lastPosted, lastMessage: $lastMessage){
@@ -94,7 +109,7 @@ export const postToSocialProfile = async (scheduledPostId, socialProfileId, soci
     const {okToPost, postingPlatform} = await getSocialProfileInformation(socialProfileId)
     console.log(okToPost, postingPlatform)
     if (okToPost) {
-        const {imageStream} = await getImage(postingPlatform, socialPost)//todo get image streem if image
+        const {imageStream} = await getImage(postingPlatform, socialPost) //returns null depending on platform and such
         await sendPost(postingPlatform, imageStream, socialPost)
         await updateDB(scheduledPostId)
     }
