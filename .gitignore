@@ -1,5 +1,6 @@
 .idea
 .env
+.hiddenkeys
 app/node_modules
 api/node_modules
 app/package-lock.json
