@@ -16,6 +16,7 @@ extend type Query {
 }
 extend type Mutation {
     SchedulePost ( 
+        socialProfileId: String,
         socialPost: SocialPostInput,
         schedule: ScheduleInput
      ): ScheduledPost

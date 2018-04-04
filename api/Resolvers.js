@@ -52,8 +52,9 @@ export default {
             //todo fix settings page on main app
             const sched = data.schedule
             const post = data.socialPost
-            const fakeSocialProfileId = '....'
+            const socialProfileId = data.socialProfileId
             const fakeScheduledPostId = '12342321'
+            //TODO MAKE THE SCHEDULED POST
             const cronTime = (true)? '* * * * * *' : //todo take true off when done
                 sched.minute.toString()+' '+
                 sched.hour.toString()+' '+
@@ -66,7 +67,7 @@ export default {
             //     start: true,
             //     timeZone: timeZone
             // })
-            postToSocialProfile(fakeScheduledPostId, fakeSocialProfileId, post, sched)
+            postToSocialProfile(fakeScheduledPostId, socialProfileId, post, sched)
             return new Promise((resolve, reject) => {
                 resolve(Object.assign({},
                     {
