@@ -8,5 +8,4 @@ import resolvers from './Resolvers';
 export default makeExecutableSchema({
     typeDefs: [Base, ScheduledPost, SocialPost, Schedule],
     resolvers,
-    //logger: { log: e => console.log(e) },
 });

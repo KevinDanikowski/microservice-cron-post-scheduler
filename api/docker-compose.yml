@@ -1,0 +1,8 @@
+version: "3"
+services:
+  cron-post-scheduler:
+    build: .
+    ports: 
+      - "3020:3020"
+    expose:
+      - "3020"

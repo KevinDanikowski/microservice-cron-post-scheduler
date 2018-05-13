@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js --exec babel-node --presents env",
+    "start": "nodemon server.js --exec babel-node --presets env",
+    "deploy": "pm2 server.js --exec babel-node --presets env",
     "test": "set NODE_ENV=test&& mocha --compilers js:babel-register --require ./test/helpers.js --recursive"
   },
   "author": "Kevin Danikowski",
@@ -30,6 +31,7 @@
     "chai-http": "^4.0.0",
     "mocha": "^5.0.1",
     "nodemon": "^1.14.12",
+    "pm2": "^2.10.3",
     "sinon": "^4.3.0"
   }
 }

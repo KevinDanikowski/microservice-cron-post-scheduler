@@ -1,4 +1,4 @@
-require('dotenv').config({path: '../.env'})
+require('dotenv').config({path: '.env'})
 
 const ENV_FILE = {
     apiPort: process.env.API_PORT || 3334,
