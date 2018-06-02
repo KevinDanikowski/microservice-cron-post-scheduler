@@ -40,7 +40,8 @@ export default {
                                     date: scheduledPost.schedule.date,
                                     hour: scheduledPost.schedule.hour,
                                     minute: scheduledPost.schedule.minute
-                                })
+                                }),
+                            error: scheduledPost.error
                         })
                 })
             })
@@ -67,14 +68,15 @@ export default {
             //     start: true,
             //     timeZone: timeZone
             // })
-            postToSocialProfile(fakeScheduledPostId, socialProfileId, post, sched)
+            const {error} = postToSocialProfile(fakeScheduledPostId, socialProfileId, post, sched)
             return new Promise((resolve, reject) => {
                 resolve(Object.assign({},
                     {
                         socialPost: post,
                         schedule: sched,
                         dateToBePosted: '',
-                        posted: false
+                        posted: false,
+                        error: error
                     }))
             })
         }

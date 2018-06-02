@@ -36,7 +36,8 @@ const ScheduledPost = Conn.define('scheduledPost',{
     posted: { type: Sequelize.BOOLEAN, defaultValue: false },
     canceled: { type: Sequelize.BOOLEAN, defaultValue: false },
     socialProfileId: { type: Sequelize.STRING },
-    dateToBePosted: { type: Sequelize.STRING }
+    dateToBePosted: { type: Sequelize.STRING },
+    error: { type: Sequelize.STRING, defaultValue: null }
 })
 
 /*   Relations   */

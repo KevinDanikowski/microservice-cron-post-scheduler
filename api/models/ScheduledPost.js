@@ -10,6 +10,7 @@ type ScheduledPost {
     posted: Boolean
     canceled: Boolean
     socialProfileId: String
+    error: String
 }
 extend type Query {
     allScheduledPosts: [ScheduledPost]

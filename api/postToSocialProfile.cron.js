@@ -147,7 +147,7 @@ const sendErrorToGraphCool = (errorMessage, socialPost, schedule, userId) => {
             }
         }).then(function ({data}) {
             if (data.error) console.log('failed to createUserNotification, see errors: ', data.error)
-            //data is data.data.createUserNotification
+            //data is data.data.createUserNotification //TODO: create user notification
             else console.log('created user notification');
             resolve()
         }).catch(error => {
@@ -157,15 +157,21 @@ const sendErrorToGraphCool = (errorMessage, socialPost, schedule, userId) => {
 }
 export const postToSocialProfile = async (scheduledPostId, socialProfileId, socialPost, schedule) => {
     const {okToPost, postingPlatform, userId} = await getSocialProfileInformation(socialProfileId)
+    let error = null
     if (okToPost) {
         const { imageStream } = await getImage(postingPlatform, socialPost) //returns null depending on platform and such
         const { successfullyPosted } = await sendPost(postingPlatform, imageStream, socialPost)
-        if (successfullyPosted) await updateDB(successfullyPosted, scheduledPostId, socialPost)//todo don't forget ! off
-        else await sendErrorToGraphCool('Failed to post', socialPost, schedule, userId)
+        if (successfullyPosted) {
+            await updateDB(successfullyPosted, scheduledPostId, socialPost)//todo: don't forget ! off
+        }
+        else {
+            await sendErrorToGraphCool('Failed to post', socialPost, schedule, userId)
+            error = `Failed to send post ${socialPost.id} to posting platform`
+        }
     }
     if (!okToPost) {
-        const err = 'Failed to fetch social profile or social profile doesn\'t have a posting platform'
-        await sendErrorToGraphCool(err, socialPost, schedule, userId)
+        error = `Failed to fetch social profile ${socialProfileId} or social profile doesn\'t have a posting platform`
+        await sendErrorToGraphCool(error, socialPost, schedule, userId)
     }
-    console.log('finished')
+    return error
 }
